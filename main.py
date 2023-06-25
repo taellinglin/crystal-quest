@@ -1,6 +1,5 @@
 from direct.showbase.ShowBase import ShowBase
 from skysphere import SkySphere
-from panda3d.core import loadPrcFileData
 
 
 class CrystalQuest(ShowBase):
@@ -11,14 +10,7 @@ class CrystalQuest(ShowBase):
 
         self.sky_sphere = SkySphere(self)
 
-        # Set fullscreen resolution
-        width, height = 1920, 1080
-        #Change resolution 
-        loadPrcFileData("", "win-size" + str(width) + " " + str(height))
-        #make full screen
-        loadPrcFileData("", "fullscreen t")
-
-        self.sky_sphere.run()
+        self.taskMgr.add(self.sky_sphere.update, "update_task")
 
 
 app = CrystalQuest()
